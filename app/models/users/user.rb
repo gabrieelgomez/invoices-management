@@ -9,5 +9,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :type, :rfc, :name, presence: true
-  validates :type, inclusion: { in: TYPES }
+  # validates :type, inclusion: { in: TYPES }
 end

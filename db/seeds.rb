@@ -17,4 +17,20 @@
   )
 
   puts user.email
+  puts user.valid?
+end
+
+15.times do
+  Invoice.create(
+    invoice_uuid: SecureRandom.uuid,
+    status: :active,
+    emitter: Emitter.all.sample,
+    receiver: Receiver.all.sample,
+    amount: FFaker::Number.decimal,
+    currency: FFaker::Currency.code,
+    emitted_at: FFaker::Time.date,
+    expires_at: FFaker::Time.date,
+    signed_at: FFaker::Time.date,
+    cfdi_digital_stamp: FFaker::DizzleIpsum.characters
+  )
 end
