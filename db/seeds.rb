@@ -26,7 +26,7 @@ end
     status: :active,
     emitter: Emitter.all.sample,
     receiver: Receiver.all.sample,
-    amount: FFaker::Number.decimal,
+    amount: FFaker::Number.number,
     currency: FFaker::Currency.code,
     emitted_at: FFaker::Time.date,
     expires_at: FFaker::Time.date,

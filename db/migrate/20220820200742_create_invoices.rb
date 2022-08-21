@@ -5,7 +5,7 @@ class CreateInvoices < ActiveRecord::Migration[6.1]
       t.integer :status, default: 0
       t.integer :emitter_id
       t.integer :receiver_id
-      t.float :amount, default: 0
+      t.integer :amount, default: 0
       t.string :currency
       t.date :emitted_at
       t.date :expires_at

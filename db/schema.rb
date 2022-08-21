@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_20_202205) do
     t.integer "status", default: 0
     t.integer "emitter_id"
     t.integer "receiver_id"
-    t.float "amount", default: 0.0
+    t.integer "amount", default: 0
     t.string "currency"
     t.date "emitted_at"
     t.date "expires_at"

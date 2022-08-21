@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   resources :invoices
 
+  resources :bulk_uploads, only: %i[new create]
+
   root to: 'invoices#index'
 end

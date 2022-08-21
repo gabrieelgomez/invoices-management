@@ -6,5 +6,7 @@ class Invoice < ApplicationRecord
 
   enum status: %i[inactive active]
 
+  validates :invoice_uuid, :cfdi_digital_stamp, presence: true, uniqueness: true
+
   ransacker :status, formatter: proc { |v| statuses[v] }
 end
