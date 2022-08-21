@@ -1,0 +1,53 @@
+<section class="w-full">
+  <div class="w-full p-8 rounded-lg bg-white shadow-lg">
+    <%= search_form_for @q, url: invoices_path, class: 'row', method: :get do |f| %>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+
+        <div class="col-span-1">
+          <%= f.label :status_eq, class: "block text-sm font-medium leading-5 text-gray-700" %>
+          <%= f.select :status_eq, Invoice.statuses.keys, { include_blank: 'Todos' }, { class: 'form-control' } %>
+        </div>
+
+        <div class="col-span-1">
+          <%= f.label :emitter_id_eq, class: "block text-sm font-medium leading-5 text-gray-700" %>
+            <%= f.collection_select :emitter_id_eq, Emitter.all, :id, :name, { include_blank: 'Todos' } %>
+        </div>
+
+        <div class="col-span-1">
+          <%= f.label :receiver_id_eq, class: "block text-sm font-medium leading-5 text-gray-700" %>
+            <%= f.collection_select :receiver_id_eq, Receiver.all, :id, :name, { include_blank: 'Todos' } %>
+        </div>
+
+        <div class="col-span-1">
+        </div>
+
+        <div class="col-span-1">
+          <%= f.label 'Fecha Emision Desde', class: "block text-sm font-medium leading-5 text-gray-700" %>
+          <%= f.date_field :emitted_at_dategteq, class: "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+        </div>
+
+        <div class="col-span-1">
+          <%= f.label 'Fecha Emision Hasta', class: "block text-sm font-medium leading-5 text-gray-700" %>
+          <%= f.date_field :emitted_at_datelteq, class: "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+        </div>
+
+        <div class="col-span-2">
+        </div>
+
+        <div class="col-span-1">
+          <%= f.label :amount_gteq, class: "block text-sm font-medium leading-5 text-gray-700" %>
+          <%= f.text_field :amount_gteq, class: "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+        </div>
+
+        <div class="col-span-1">
+          <%= f.label :amount_lteq, class: "block text-sm font-medium leading-5 text-gray-700" %>
+          <%= f.text_field :amount_lteq, class: "mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+        </div>
+
+
+        <div class="col-span-1 inline-flex lg:items-end lg:justify-end">
+          <%= f.submit 'Buscar', class: "h-12 inline-flex justify-center px-8 py-3 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:ring-2 active:bg-green-700 transition duration-150 ease-in-out" %>
+        </div>
+    <% end %>
+  </div>
+</section>

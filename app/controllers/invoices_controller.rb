@@ -5,7 +5,11 @@ class InvoicesController < ApplicationController
 
   # GET /invoices
   def index
-    @invoices = Invoice.all
+    @q = Invoice.ransack(params[:q])
+
+    @invoices = @q.result(distinct: true)
+                  .includes(:emitter, :receiver)
+                  .order(emitted_at: :desc)
   end
 
   # GET /invoices/1
