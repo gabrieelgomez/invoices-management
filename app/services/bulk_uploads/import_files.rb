@@ -2,25 +2,14 @@ module BulkUploads
   class ImportFiles
     attr_accessor :xmls, :invoices
 
-    COLUMNS = %i[invoice_uuid
-                 status
-                 emitter_id
-                 receiver_id
-                 amount
-                 currency
-                 emitted_at
-                 expires_at
-                 signed_at
-                 cfdi_digital_stamp].freeze
-
     def initialize(xmls)
       @xmls = xmls.map { |xml| OpenStruct.new xml['hash'] }
       @invoices = convert_xmls_to_invoice_attributes
     end
 
     def call
-      Invoice.upsert_all(invoices, update_only: COLUMNS)
-      # Invoice.import(COLUMNS, invoices)
+      Invoice.upsert_all(invoices, unique_by: Invoice::UNIQUE_COLUMS)
+      # Invoice.import!(COLUMNS, invoices, validate: true)
     end
 
     private

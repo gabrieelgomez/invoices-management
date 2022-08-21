@@ -5,8 +5,14 @@ class BulkUploadsController < ApplicationController
   def new; end
 
   def create
-    ::BulkUploads::ParseFiles.new(params).call
+    ::BulkUploads::ProcessFiles.new(path_files).import
 
     redirect_to invoices_path, notice: 'Sus archivos están siendo procesados'
+  end
+
+  private
+
+  def path_files
+    params.dig(:bulk_upload, :files).compact_blank.map(&:path)
   end
 end
