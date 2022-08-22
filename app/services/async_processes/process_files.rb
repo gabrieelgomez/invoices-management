@@ -1,4 +1,6 @@
 module AsyncProcesses
+  require 'open-uri'
+
   class ProcessFiles
     attr_accessor :files, :xmls
 
@@ -13,7 +15,7 @@ module AsyncProcesses
 
     def convert_xml_to_hash
       files.compact_blank.map do |file|
-        Hash.from_xml(File.open(file).read)
+        Hash.from_xml(URI.open(file).read)
       end
     end
   end
