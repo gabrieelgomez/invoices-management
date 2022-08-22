@@ -1,7 +1,9 @@
-describe BulkUploads::ProcessFiles do
+require 'rails_helper'
+
+RSpec.describe AsyncProcesses::ProcessFiles do
   context 'Bulk upload massive XML files path' do
     describe '.new' do
-      context 'when initialize BulkUploads::ProcessFiles Service with whatever path' do
+      context 'when initialize AsyncProcesses::ProcessFiles Service with whatever path' do
         before(:each) do
           @xmls_path_stubs = [
             'spec/stubs/invoices/4b03c0b2-aa3f-4309-81a9-28a7d4f67ce9.xml',
@@ -10,23 +12,23 @@ describe BulkUploads::ProcessFiles do
             'spec/stubs/invoices/91c1424f-87b3-4933-99e7-2fb3e24924e9.xml'
           ]
 
-          @bulk_upload_service = BulkUploads::ProcessFiles.new(@xmls_path_stubs)
+          @async_process_service = AsyncProcesses::ProcessFiles.new(@xmls_path_stubs)
         end
 
         it 'should be respond to xmls instance method' do
-          expect(@bulk_upload_service).to respond_to(:xmls)
+          expect(@async_process_service).to respond_to(:xmls)
         end
 
         it 'should be respond to files instance method' do
-          expect(@bulk_upload_service).to respond_to(:files)
+          expect(@async_process_service).to respond_to(:files)
         end
 
         it 'returns four items' do
-          expect(@bulk_upload_service.xmls.size).to eq(4)
+          expect(@async_process_service.xmls.size).to eq(4)
         end
 
         it 'returns valid keys' do
-          expect(@bulk_upload_service.xmls.first['hash'].keys).to eq(%w[invoice_uuid status emitter receiver amount emitted_at expires_at signed_at cfdi_digital_stamp])
+          expect(@async_process_service.xmls.first['hash'].keys).to eq(%w[invoice_uuid status emitter receiver amount emitted_at expires_at signed_at cfdi_digital_stamp])
         end
       end
     end
@@ -43,15 +45,15 @@ describe BulkUploads::ProcessFiles do
             'spec/stubs/invoices/91c1424f-87b3-4933-99e7-2fb3e24924e9.xml'
           ]
 
-          @bulk_upload_service = BulkUploads::ProcessFiles.new(@xmls_path_stubs).import
+          @async_process_service = AsyncProcesses::ProcessFiles.new(@xmls_path_stubs).import
         end
 
         it 'returns four invoices' do
-          expect(@bulk_upload_service.rows.size).to eq(4)
+          expect(@async_process_service.rows.size).to eq(4)
         end
 
         it 'returns invoice_uuid invoices' do
-          expect(@bulk_upload_service.rows.map(&:first)).to eq(invoices_uuid)
+          expect(@async_process_service.rows.map(&:first)).to eq(invoices_uuid)
         end
 
         it 'returns invoices from database' do
@@ -59,7 +61,7 @@ describe BulkUploads::ProcessFiles do
         end
 
         it 'should be a instace ActiveRecord::Result valid' do
-          expect(@bulk_upload_service).to be_a(ActiveRecord::Result)
+          expect(@async_process_service).to be_a(ActiveRecord::Result)
         end
       end
     end
