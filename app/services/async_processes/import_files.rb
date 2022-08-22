@@ -9,7 +9,6 @@ module AsyncProcesses
 
     def call
       Invoice.upsert_all(invoices, unique_by: Invoice::UNIQUE_COLUMS, returning: %w[invoice_uuid])
-      # Invoice.import!(COLUMNS, invoices, validate: true)
     end
 
     private

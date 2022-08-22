@@ -7,9 +7,13 @@ class InvoicesController < ApplicationController
   def index
     @q = Invoice.ransack(params[:q])
 
-    @invoices = @q.result(distinct: true)
-                  .includes(:emitter, :receiver)
-                  .order(emitted_at: :desc)
+    @pagy, @invoices =
+      pagy(
+        @q.result(distinct: true)
+          .includes(:emitter, :receiver)
+          .order(emitted_at: :desc),
+        items: 10
+      )
   end
 
   # GET /invoices/1

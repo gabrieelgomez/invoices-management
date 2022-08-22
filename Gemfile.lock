@@ -54,8 +54,6 @@ GEM
     activerecord (7.0.3.1)
       activemodel (= 7.0.3.1)
       activesupport (= 7.0.3.1)
-    activerecord-import (1.4.0)
-      activerecord (>= 4.2)
     activestorage (7.0.3.1)
       actionpack (= 7.0.3.1)
       activejob (= 7.0.3.1)
@@ -150,6 +148,8 @@ GEM
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (5.10.1)
+      activesupport
     parallel (1.22.1)
     parser (3.1.2.1)
       ast (~> 2.4.1)
@@ -291,7 +291,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-import
   awesome_print
   bootsnap
   byebug
@@ -303,6 +302,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   listen (~> 3.3)
+  pagy
   pg (~> 1.1)
   pry
   puma (~> 5.0)
